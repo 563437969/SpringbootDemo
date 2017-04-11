@@ -1,0 +1,171 @@
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">  
+<head>
+    <title th:text="${title}"></title>  
+</head>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- Animate.css -->
+    <link th:href="@{/vendors/animate.css/animate.min.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
+
+<body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form" >
+          <section class="login_content">
+            <form th:action="@{/loginLogin}" method="post" id="loginLogin_form">
+              <h1>欢迎登录本系统</h1>
+              <div>
+                <input type="text" class="form-control" name="userName" placeholder="用户名" required="" />
+              </div>
+              <div>
+                <input type="password" class="form-control" name="password" placeholder="密码" required="" />
+              </div>
+              <div>
+                <input type="submit" class="btn btn-default submit"  id="login_btn" value="登录"/>
+                <a class="reset_pass" href="javascript:;">找回密码?</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">新用户？
+                  <a href="#signup" class="to_register"> 注册 </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> 测试网站!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <div id="register" class="animate form registration_form">
+          <section class="login_content">
+            <form th:action="@{/loginRegister}" method="post">
+              <h1>注册</h1>
+              <div>
+                <input name="userName" type="text" class="form-control" placeholder="用户名" required="" />
+              </div>
+              <div>
+                <input name="nickName" type="text" class="form-control" placeholder="昵称" required="" />
+              </div>
+              <div>
+                <input name="phone" type="text" class="form-control" placeholder="手机号" required="" />
+              </div>
+              <div>
+                <input name="email" type="text" class="form-control" placeholder="邮箱" required="" />
+              </div>
+              <div>
+                <input name="password" type="password" class="form-control" placeholder="密码" required="" />
+              </div>
+              <div>
+                <a id="reg_sub" class="btn btn-default submit" href="javascript:;">提交</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">已有账号？
+                  <a href="#signin" class="to_register"> 请登录 </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+<!-- jQuery -->
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/layer/layer.js}"></script>
+ <script th:inline="javascript">
+ 
+   
+   $(function(){
+	   $("#reg_sub").click(function(){
+		   /**注册*/
+		   var userName = $("#register").find("input[name='userName']").val();
+		   var nickName = $("#register").find("input[name='nickName']").val();
+		   var phone = $("#register").find("input[name='phone']").val();
+		   var email = $("#register").find("input[name='email']").val();
+		   var password = $("#register").find("input[name='password']").val();
+		   
+		   if("" == userName){
+			   show_msg("用户名不能为空");
+			   return;
+		   }
+		   if("" == nickName){
+			   show_msg("昵称不能为空");
+			   return;
+		   }
+		   if("" == phone){
+			   show_msg("手机号不能为空");
+			   return;
+		   }
+		   
+		   if("" == email){
+			   show_msg("邮箱不能为空");
+			   return;
+		   }
+		   
+		   if("" == password){
+			   show_msg("密码不能为空");
+			   return;
+		   }
+		   
+		  $("#register").find("form").submit();
+	   });
+	   
+	   
+	   //登录
+	   /*$("#login_btn").click(function(){
+		   var userName = $("#loginLogin_form").find("input[name='userName']").val();
+		   var password = $("#loginLogin_form").find("input[name='password']").val();
+		   if("" == userName){
+			   show_msg("用户名不能为空");
+			   return;
+		   }
+		   if("" == password){
+			   show_msg("密码不能为空");
+			   return;
+		   }
+		   $("#loginLogin_form").submit();
+	   });*/
+   });
+   
+   function show_msg(msg){
+	   layer.msg(msg, {
+		     offset: 't',
+		     anim: 6,
+		     tips: [1,'red']
+		   });
+   }
+ </script>
+</html>

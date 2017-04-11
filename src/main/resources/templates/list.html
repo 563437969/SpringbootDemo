@@ -1,0 +1,91 @@
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">  
+<head>
+    <title>首页</title>  
+</head>
+
+<!-- 头部css引入BEGIN --> 
+<div th:include="includes/top::css"></div>
+<!-- 头部css引入END -->
+
+<body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+       
+       <!-- 菜单栏BEGIN -->
+       <div class="col-md-3 left_col" th:include="includes/left::menu"></div>
+       <!-- 菜单栏END -->
+       
+        <!-- 右侧头部BEGIN -->
+        <div class="top_nav" th:include="includes/header::top"></div>
+        <!-- 右侧头部END -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+             <div class="x_content">
+                 <p class="text-muted font-13 m-b-30">
+                 </p>
+                 <table id="userListtable" class="table table-striped table-bordered">
+                   <thead>
+                     <tr>
+                       <th>ID</th>
+                       <th>用户名</th>
+                       <th>昵称</th>
+                       <th>邮箱</th>
+                       <th>手机号</th>
+                       <th>状态</th>
+                       <th>操作</th>
+                     </tr>
+                   </thead>
+                   <tbody>
+                   </tbody>
+                 </table>
+             </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer th:include="includes/footer::footer"></footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+   <!-- 底部JS引入 -->
+    <div th:include="includes/foot::js"></div>
+	
+  </body>
+  
+  <script th:inline="javascript">
+   $(function(){
+	   $('#userListtable').dataTable({
+		     "processing": true,  
+	         "serverSide": true,
+		      "ajax":$.fn.dataTable.pipeline( {  
+		            url:[[@{/users/getList}]],  
+		            pages:5,
+		            //data:{userId:"55555"}
+		       }),
+			  "columns":[
+			    {"data":"id"},
+			    {"data":"userName"},
+			    {"data":"nickName"},
+			    {"data":"phone"},
+			    {"data":"email"},
+			    {"data":"status"},
+                {
+			     "mRender": function ( data, type, full ) {  
+			    	 return "<a href=\"javascript:;\" onClick=\"alert('"+full.id+"')\">编辑</a>&nbsp;&nbsp;&nbsp;"+
+                     "<a href=\"javascript:;\" onClick=\"test()\">删除</a>";
+                 }	
+                } 
+			  ]
+			});
+   });
+   
+   function test(){
+	   //刷新列表
+	   $('#userListtable').dataTable().api().clearPipeline().draw(false);
+   }
+  </script>
+</html>
