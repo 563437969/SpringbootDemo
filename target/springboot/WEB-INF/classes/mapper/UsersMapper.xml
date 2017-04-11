@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.UsersDao">
+
+       <!-- 获取用户信息 -->
+       <select id="getCacheByUser" parameterType="Users" resultType="Users">
+         SELECT 
+                id,userName,password,nickName,phone,email,status 
+         FROM 
+                users 
+         WHERE 
+         
+           <if test="id != null and id != ''">
+             id=#{id}
+           </if>
+           <if test="userName != null and userName != ''">
+             userName=#{userName}
+           </if>
+           <if test="password != null and password != ''">
+           AND
+             password=#{password}
+           </if>
+       </select>
+		
+		<sql id="userNameLike">
+		   <if test="pageSearch != '' and pageSearch != null">
+		   WHERE
+		        userName LIKE CONCAT('%',#{pageSearch},'%')
+		   </if>
+		</sql>
+		
+		<!-- 分页查询用户信息 -->
+		<select id="getUserPageList" parameterType="Users" resultType="Users">
+		   SELECT
+		          id,
+		          userName,
+		          nickName,
+		          phone,
+		          email,
+		          status
+		   FROM
+		        users
+		   <include refid="userNameLike"></include>
+		   LIMIT #{pageStart},#{pageLength}
+		</select>
+		
+		<!-- 查询分页数据总数 -->
+		<select id="getUserPageListTotal" parameterType="Users" resultType="Integer">
+		   SELECT
+		         count(id)
+		   FROM
+		        users
+		   <include refid="userNameLike"></include>
+		</select>
+</mapper>

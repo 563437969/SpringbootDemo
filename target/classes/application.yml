@@ -1,0 +1,38 @@
+myProps:
+  simpleProp: simplePropValue  
+  arrayProps: 1,2,3,4,5  
+  listProp1:  
+    - name: abc  
+      value: abcValue  
+    - name: efg  
+      value: efgValue  
+  listProp2:  
+    - config2Value1  
+    - config2Vavlue2  
+  mapProps:  
+    key1: value1  
+    key2: value2
+    
+
+spring:  
+    datasource:  
+        name: test  
+        url: jdbc:mysql://192.168.186.110:3306/xiaoqiang?useUnicode=true&characterEncoding=UTF-8
+        username: root  
+        password:   
+        # 使用druid数据源  
+        type: com.alibaba.druid.pool.DruidDataSource  
+        driver-class-name: com.mysql.jdbc.Driver  
+        filters: stat  
+        maxActive: 20  
+        initialSize: 1  
+        maxWait: 60000  
+        minIdle: 1  
+        timeBetweenEvictionRunsMillis: 60000  
+        minEvictableIdleTimeMillis: 300000  
+        validationQuery: select 'x'  
+        testWhileIdle: true  
+        testOnBorrow: false  
+        testOnReturn: false  
+        poolPreparedStatements: true  
+        maxOpenPreparedStatements: 20  

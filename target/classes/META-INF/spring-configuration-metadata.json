@@ -1,0 +1,47 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.example.config.LoadYml",
+      "name": "myProps",
+      "type": "com.example.config.LoadYml"
+    },
+    {
+      "sourceType": "com.example.config.LoadProperties",
+      "name": "server",
+      "type": "com.example.config.LoadProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.example.config.LoadYml",
+      "name": "myProps.array-props",
+      "type": "java.lang.String[]"
+    },
+    {
+      "sourceType": "com.example.config.LoadYml",
+      "name": "myProps.list-prop1",
+      "type": "java.util.List<java.util.Map<java.lang.String,java.lang.String>>"
+    },
+    {
+      "sourceType": "com.example.config.LoadYml",
+      "name": "myProps.list-prop2",
+      "type": "java.util.List<java.lang.String>"
+    },
+    {
+      "sourceType": "com.example.config.LoadYml",
+      "name": "myProps.map-props",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "com.example.config.LoadYml",
+      "name": "myProps.simple-prop",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.example.config.LoadProperties",
+      "name": "server.port",
+      "type": "java.lang.String"
+    }
+  ]
+}
